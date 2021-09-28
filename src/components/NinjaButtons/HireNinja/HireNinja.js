@@ -1,36 +1,33 @@
 import React from "react";
 import JobsCard from "./JobsCard";
+import axios from "axios";
 import { FilterContainer } from "./StyleHireNinja";
 
 class HireNinja extends React.Component {
   state = {
-    jobs: [
-      {
-        title: "Codar no React",
-        description: "Você vai aprender a criar aplicações web com React",
-        price: "R$ 1.000,00",
-        paymentMethods: ["Paypal", "Cartão de crédito", "Dinheiro"],
-        dueDate: "10/12/2021",
-        taken: false,
-      },
-      {
-        title: "Codar no React2",
-        description: "Você vai aprender a criar aplicações web com React",
-        price: "R$ 1.000,00",
-        paymentMethods: ["Paypal", "Cartão de crédito", "Dinheiro"],
-        dueDate: "10/12/2021",
-        taken: false,
-      },
-      {
-        title: "Codar no React3",
-        description: "Você vai aprender a criar aplicações web com React",
-        price: "R$ 1.000,00",
-        paymentMethods: ["Paypal", "Cartão de crédito", "Dinheiro"],
-        dueDate: "10/12/2021",
-        taken: false,
-      },
-    ],
+    jobs: [],
   };
+
+  componentDidMount() {
+    this.getAllJobs();
+  }
+
+  getAllJobs = async () => {
+    const url = "https://labeninjas.herokuapp.com/jobs";
+    const res = await axios.get(url, {
+      headers: {
+        Authorization: "8c24d255-953c-478d-abd9-919b05f53b21",
+      },
+    });
+    try {
+      this.setState({
+        jobs: res.data.jobs,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   render() {
     const jobsPosted = this.state.jobs.map((job) => {
       return (
