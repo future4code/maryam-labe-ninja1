@@ -2,7 +2,7 @@ import React from "react";
 import JobsCard from "./JobsCard";
 import { FilterContainer } from "./StyleHireNinja";
 
-class BeANinja extends React.Component {
+class HireNinja extends React.Component {
   state = {
     jobs: [
       {
@@ -65,4 +65,4 @@ class BeANinja extends React.Component {
   }
 }
 
-export default BeANinja;
+export default HireNinja;
