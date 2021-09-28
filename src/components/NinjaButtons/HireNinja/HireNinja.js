@@ -1,11 +1,14 @@
 import React from "react";
 import JobsCard from "./JobsCard";
 import axios from "axios";
-import { FilterContainer } from "./StyleHireNinja";
+import NinjaFilter from "./NinjaFilter";
 
 class HireNinja extends React.Component {
   state = {
     jobs: [],
+    maxValue: "",
+    minValue: "",
+    sorting: "title",
   };
 
   componentDidMount() {
@@ -28,36 +31,69 @@ class HireNinja extends React.Component {
     }
   };
 
-  render() {
-    const jobsPosted = this.state.jobs.map((job) => {
-      return (
-        <JobsCard
-          key={job.title}
-          title={job.title}
-          price={job.price}
-          paymentMethods={job.paymentMethods}
-          dueDate={job.dueDate}
-        />
-      );
+  handleMaxValue = (e) => {
+    this.setState({
+      maxValue: e.target.value,
     });
+  };
+
+  handleMinValue = (e) => {
+    this.setState({
+      minValue: e.target.value,
+    });
+  };
+
+  handleChangeSorting = (e) => {
+    this.setState({
+      sorting: e.target.value,
+    });
+  };
+
+  render() {
+    const jobsPosted = this.state.jobs
+      .filter((job) => {
+        return this.state.minValue === "" || job.price >= this.state.minValue;
+      })
+      .filter((job) => {
+        return this.state.maxValue === "" || job.price <= this.state.maxValue;
+      })
+      .sort((a, b) => {
+        switch (this.state.sorting) {
+          case "title":
+            return a.title.localeCompare(b.title);
+          case "higher":
+            return a.price - b.price;
+          case "lower":
+            return b.price - a.price;
+          case "dueDate":
+            return a.dueDate - b.dueDate;
+          default:
+            return a.title.localeCompare(b.title);
+        }
+      })
+      .map((job) => {
+        return (
+          <JobsCard
+            key={job.title}
+            title={job.title}
+            price={job.price}
+            paymentMethods={job.paymentMethods}
+            dueDate={job.dueDate}
+          />
+        );
+      });
 
     return (
-      <div>
-        <FilterContainer>
-          <label htmlFor="Ordenar">Ordenar Por:</label>
-          <select>
-            <option value="">Titulo</option>
-            <option value="">Prazo</option>
-            <option value="">Preço Decrescente</option>
-            <option value="">Preço Crescente</option>
-          </select>
-          <label htmlFor="Valor Minimo">Valor Mínimo:</label>
-          <input type="text" placeholder="R$" />
-          <label htmlFor="Valor Máximo">Valor Máximo:</label>
-          <input type="text" placeholder="R$" />
-        </FilterContainer>
+      <>
+        <NinjaFilter
+          maxValue={this.state.maxValue}
+          minValue={this.state.minValue}
+          handleMaxValue={this.handleMaxValue}
+          handleMinValue={this.handleMinValue}
+          handleChangeSorting={this.handleChangeSorting}
+        />
         {jobsPosted}
-      </div>
+      </>
     );
   }
 }
