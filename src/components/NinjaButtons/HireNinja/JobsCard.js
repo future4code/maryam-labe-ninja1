@@ -6,7 +6,7 @@ class JobsCard extends React.Component {
       <div>
         <h3>{this.props.title}</h3>
         <p>
-          Até {this.props.dueDate} - {this.props.price}
+          Até {this.props.dueDate} - R${this.props.price},00
         </p>
         <button>Ver Detalhes</button>
         <button>Carrinho</button>
