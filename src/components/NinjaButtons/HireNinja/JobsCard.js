@@ -8,7 +8,13 @@ class JobsCard extends React.Component {
         <p>
           Até {this.props.dueDate} - R${this.props.price},00
         </p>
-        <button>Ver Detalhes</button>
+        <button
+          onClick={() => {
+            this.props.changePage("jobDetails");
+          }}
+        >
+          Ver Detalhes
+        </button>
         <button>Carrinho</button>
       </div>
     );

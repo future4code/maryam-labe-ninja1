@@ -6,7 +6,7 @@ class NinjaFilter extends React.Component {
     return (
       <div>
         <FilterContainer>
-          <label for="sort">Ordenar Por:</label>
+          <label htmlFor="sort">Ordenar Por:</label>
           <select
             name="sort"
             value={this.props.sorting}
