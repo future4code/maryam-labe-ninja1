@@ -38,7 +38,9 @@ export default class JobDetails extends React.Component {
       this.setState({ description: res.data.description });
       this.setState({ price: res.data.price });
       this.setState({ paymentMethods: res.data.paymentMethods });
-      this.setState({ date: res.data.dueDate });
+      let convertDate = new Date(res.data.dueDate)
+      convertDate = convertDate.toLocaleDateString()
+      this.setState({ date: convertDate})
       this.setState({ taken: res.data.taken });
     } catch (err) {
       alert(err.message);
@@ -46,6 +48,8 @@ export default class JobDetails extends React.Component {
   };
 
   render() {
+    
+    
     return (
       <div>
         <Detalhes>
