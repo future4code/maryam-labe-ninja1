@@ -11,6 +11,7 @@ class JobsCard extends React.Component {
         <button
           onClick={() => {
             this.props.changePage("jobDetails");
+            this.props.handleJobId(this.props.jobId);
           }}
         >
           Ver Detalhes

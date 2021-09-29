@@ -24,19 +24,15 @@ export default class JobDetails extends React.Component {
     paymentMethods: [],
     date: "",
     taken: false,
-    // jobId:""
   };
 
   componentDidMount() {
-    console.log("entrei no job detalhes");
     this.getJobById(this.props.jobId);
   }
   getJobById = async (jobId) => {
     const url = `https://labeninjas.herokuapp.com/jobs/${jobId}`;
     try {
-      console.log("entrei na busca");
       const res = await axios.get(url, headers);
-      console.log(res.data, "detalhes job");
       this.setState({ id: res.data.id });
       this.setState({ title: res.data.title });
       this.setState({ description: res.data.description });
@@ -44,7 +40,6 @@ export default class JobDetails extends React.Component {
       this.setState({ paymentMethods: res.data.paymentMethods });
       this.setState({ date: res.data.dueDate });
       this.setState({ taken: res.data.taken });
-      console.log(this.props.jobId, "ID");
     } catch (err) {
       alert(err.message);
     }
@@ -55,10 +50,10 @@ export default class JobDetails extends React.Component {
       <div>
         <Detalhes>
           <h2>Detalhes do Job</h2>
-          <p>Nome: {this.state.title}</p>
+          <h3>{this.state.title}</h3>
           <p>Descrição:{this.state.description}</p>
-          <p>preço: {this.state.price}</p>
-          <p>data: {this.state.date}</p>
+          <p>Valor: {this.state.price}</p>
+          <p>Data Encerramento: {this.state.date}</p>
         </Detalhes>
         <button onClick={() => this.props.changePage("voltar")}>Voltar</button>
       </div>
