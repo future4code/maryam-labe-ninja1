@@ -74,7 +74,7 @@ class HireNinja extends React.Component {
       .map((job) => {
         return (
           <JobsCard
-            key={job.title}
+            key={job.id}
             title={job.title}
             price={job.price}
             paymentMethods={job.paymentMethods}

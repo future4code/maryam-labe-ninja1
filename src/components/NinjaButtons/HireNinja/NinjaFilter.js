@@ -22,7 +22,7 @@ class NinjaFilter extends React.Component {
             type="number"
             placeholder="R$"
             onChange={this.props.handleMinValue}
-            value={this.props.handleMinValue}
+            value={this.props.minValue}
           />
           <label htmlFor="Valor Máximo">Valor Máximo:</label>
           <input
