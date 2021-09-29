@@ -108,8 +108,7 @@ class HireNinja extends React.Component {
           handleMinValue={this.handleMinValue}
           handleChangeSorting={this.handleChangeSorting}
         />
-        {this.handleShowDetails()}
-        {jobsPosted}
+        {this.handleShowDetails() || jobsPosted}
       </>
     );
   }
