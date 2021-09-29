@@ -53,7 +53,7 @@ export default class App extends React.Component {
     return (
       <ContainerApp>
         <Header>
-          <button onClick={() => this.handleClickStart}>
+          <button onClick={this.handleClickStart}>
             <img src="https://rude-yoke.surge.sh/static/media/ninjaIconOutline.8ba90ce1.png" />
             <h2>Labeninjas</h2>
           </button>
