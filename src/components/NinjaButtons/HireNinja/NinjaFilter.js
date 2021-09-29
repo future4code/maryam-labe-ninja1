@@ -6,7 +6,7 @@ class NinjaFilter extends React.Component {
     return (
       <div>
         <FilterContainer>
-          <label htmlfFor="sort">Ordenar Por:</label>
+          <label for="sort">Ordenar Por:</label>
           <select
             name="sort"
             value={this.props.sorting}
@@ -22,7 +22,7 @@ class NinjaFilter extends React.Component {
             type="number"
             placeholder="R$"
             onChange={this.props.handleMinValue}
-            value={this.props.minValue}
+            value={this.props.handleMinValue}
           />
           <label htmlFor="Valor Máximo">Valor Máximo:</label>
           <input

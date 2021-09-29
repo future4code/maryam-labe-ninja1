@@ -41,7 +41,6 @@ class HireNinja extends React.Component {
     this.setState({
       minValue: e.target.value,
     });
-    console.log(this.state.minValue);
   };
 
   handleChangeSorting = (e) => {
@@ -75,7 +74,7 @@ class HireNinja extends React.Component {
       .map((job) => {
         return (
           <JobsCard
-            key={job.id}
+            key={job.title}
             title={job.title}
             price={job.price}
             paymentMethods={job.paymentMethods}
