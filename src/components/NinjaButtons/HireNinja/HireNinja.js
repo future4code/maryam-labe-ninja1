@@ -2,6 +2,7 @@ import React from "react";
 import JobsCard from "./JobsCard";
 import axios from "axios";
 import NinjaFilter from "./NinjaFilter";
+import JobDetails from "../../JobDetails/Index";
 
 class HireNinja extends React.Component {
   state = {
@@ -9,6 +10,7 @@ class HireNinja extends React.Component {
     maxValue: "",
     minValue: "",
     sorting: "title",
+    currentPage: "",
   };
 
   componentDidMount() {
@@ -31,6 +33,19 @@ class HireNinja extends React.Component {
     }
   };
 
+  handleShowDetails = () => {
+    if (this.state.currentPage === "jobDetails") {
+      return <JobDetails changePage={this.changePage} />;
+    } else if (this.state.currentPage === "back") {
+      return <HireNinja />;
+    }
+  };
+
+  changePage = (page) => {
+    this.setState({
+      currentPage: page,
+    });
+  };
   handleMaxValue = (e) => {
     this.setState({
       maxValue: e.target.value,
@@ -79,6 +94,7 @@ class HireNinja extends React.Component {
             price={job.price}
             paymentMethods={job.paymentMethods}
             dueDate={job.dueDate}
+            changePage={this.changePage}
           />
         );
       });
@@ -92,6 +108,7 @@ class HireNinja extends React.Component {
           handleMinValue={this.handleMinValue}
           handleChangeSorting={this.handleChangeSorting}
         />
+        {this.handleShowDetails()}
         {jobsPosted}
       </>
     );
