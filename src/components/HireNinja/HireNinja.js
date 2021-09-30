@@ -2,7 +2,10 @@ import React from "react";
 import JobsCard from "./JobsCard";
 import axios from "axios";
 import NinjaFilter from "./NinjaFilter";
-import JobDetails from "../../JobDetails/Index";
+import JobDetails from "../JobDetails/Index";
+import {ContainerAllJobs} from "./StyleHireNinja";
+
+
 
 class HireNinja extends React.Component {
   state = {
@@ -29,7 +32,7 @@ class HireNinja extends React.Component {
       this.setState({
         jobs: res.data.jobs,
         
-      });console.log("jobs",this.state.jobs )
+      });
     } catch (err) {
       console.log(err);
     }
@@ -118,7 +121,10 @@ class HireNinja extends React.Component {
           handleMinValue={this.handleMinValue}
           handleChangeSorting={this.handleChangeSorting}
         />
-        {this.handleShowDetails() || jobsPosted}
+        <ContainerAllJobs>
+          {this.handleShowDetails() || jobsPosted}
+        </ContainerAllJobs>
+        
       </>
     );
   }

@@ -1,6 +1,6 @@
 import React from "react";
 import { ContainerApp, Header, ContainerStart } from "./style.js";
-import HireNinja from "./components/NinjaButtons/HireNinja/HireNinja";
+import HireNinja from "./components/HireNinja/HireNinja";
 import BeNinja from "./components/BeNinja/index.js";
 
 export default class App extends React.Component {
@@ -27,7 +27,7 @@ export default class App extends React.Component {
           <ContainerStart>
             <img
               alt="Ninja Logo"
-              src="https://labenu.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F2a51ad96-d8b7-4df3-bf68-828d473c84ef%2Flabeninjas2.png?table=block&id=5269d1e7-6031-402f-b326-fa0ed68bc43f&spaceId=f97190af-c9c2-4592-9ae2-6311b6b728de&width=740&userId=&cache=v2"
+              src="./sourceImages/labeninjasLogoGrande.png"
             />
             <button onClick={this.handleClickBeNinja}>
               QUERO SER UM NINJA
@@ -48,13 +48,14 @@ export default class App extends React.Component {
   };
 
   render() {
-    console.log(this.state.section);
     return (
       <ContainerApp>
         <Header>
           <button onClick={this.handleClickStart}>
-            <img src="https://rude-yoke.surge.sh/static/media/ninjaIconOutline.8ba90ce1.png" />
-            <h2>Labeninjas</h2>
+            <img 
+            src="./sourceImages/labeninjasLogoPeq.png" 
+            alt="logo Labeninjas Pequeno"/>
+            <h2>LabeNinjas</h2>
           </button>
         </Header>
         {this.renderSection()}
