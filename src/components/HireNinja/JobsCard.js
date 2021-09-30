@@ -1,18 +1,20 @@
 import React from "react";
-import { JobsCardContainer, ButtonJobCard } from "./StyleHireNinja";
+import {JobsCardContainer, ButtonJobCard}from "./StyleHireNinja"
 
 class JobsCard extends React.Component {
   render() {
-    let convertDate = new Date(this.props.dueDate);
-    const formatedDate = convertDate.toLocaleDateString("pt-BR", {
-      timeZone: "UTC",
-    });
+    let convertDate = new Date(this.props.dueDate)
+      const formatedDate = convertDate.toLocaleDateString('pt-BR', {timeZone: "UTC"})
 
     return (
       <JobsCardContainer>
         <h3>{this.props.title}</h3>
-        <p>Contratar Até: {formatedDate}</p>
-        <p>Valor: R${this.props.price},00</p>
+        <p>
+          Contratar Até: {formatedDate} 
+        </p>
+        <p>
+          Valor: R${this.props.price},00
+        </p>
         <ButtonJobCard>
           <button
             onClick={() => {
@@ -22,7 +24,7 @@ class JobsCard extends React.Component {
           >
             Ver Detalhes
           </button>
-          <button>Carrinho</button>
+          <button>carrinho</button>
         </ButtonJobCard>
       </JobsCardContainer>
     );

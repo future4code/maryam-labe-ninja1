@@ -3,7 +3,9 @@ import JobsCard from "./JobsCard";
 import axios from "axios";
 import NinjaFilter from "./NinjaFilter";
 import JobDetails from "../JobDetails/Index";
-import { ContainerAllJobs } from "./StyleHireNinja";
+import {ContainerAllJobs} from "./StyleHireNinja";
+
+
 
 class HireNinja extends React.Component {
   state = {
@@ -12,8 +14,7 @@ class HireNinja extends React.Component {
     minValue: "",
     sorting: "title",
     currentPage: "",
-    jobId: "",
-    query: "",
+    jobId:""
   };
 
   componentDidMount() {
@@ -30,6 +31,7 @@ class HireNinja extends React.Component {
     try {
       this.setState({
         jobs: res.data.jobs,
+        
       });
     } catch (err) {
       console.log(err);
@@ -38,9 +40,10 @@ class HireNinja extends React.Component {
 
   handleShowDetails = () => {
     if (this.state.currentPage === "jobDetails") {
-      return (
-        <JobDetails changePage={this.changePage} jobId={this.state.jobId} />
-      );
+      return <JobDetails changePage={this.changePage} 
+              jobId={this.state.jobId}
+              
+            />;
     } else if (this.state.currentPage === "back") {
       return <HireNinja />;
     }
@@ -51,16 +54,9 @@ class HireNinja extends React.Component {
       currentPage: page,
     });
   };
-
-  handleQuery = (e) => {
-    this.setState({
-      query: e.target.value,
-    });
-  };
-
   handleJobId = (jobId) => {
-    this.setState({ jobId: jobId });
-  };
+    this.setState({jobId: jobId})
+  }
   handleMaxValue = (e) => {
     this.setState({
       maxValue: e.target.value,
@@ -81,9 +77,6 @@ class HireNinja extends React.Component {
 
   render() {
     const jobsPosted = this.state.jobs
-      .filter((job) => {
-        return job.title.toLowerCase().includes(this.state.query.toLowerCase());
-      })
       .filter((job) => {
         return this.state.minValue === "" || job.price >= this.state.minValue;
       })
@@ -113,7 +106,7 @@ class HireNinja extends React.Component {
             paymentMethods={job.paymentMethods}
             dueDate={job.dueDate}
             changePage={this.changePage}
-            handleJobId={this.handleJobId}
+            handleJobId = {this.handleJobId}
             jobId={job.id}
           />
         );
@@ -122,8 +115,6 @@ class HireNinja extends React.Component {
     return (
       <>
         <NinjaFilter
-          query={this.state.query}
-          handleQuery={this.handleQuery}
           maxValue={this.state.maxValue}
           minValue={this.state.minValue}
           handleMaxValue={this.handleMaxValue}
@@ -133,6 +124,7 @@ class HireNinja extends React.Component {
         <ContainerAllJobs>
           {this.handleShowDetails() || jobsPosted}
         </ContainerAllJobs>
+        
       </>
     );
   }

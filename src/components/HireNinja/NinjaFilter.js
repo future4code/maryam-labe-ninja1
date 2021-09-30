@@ -1,6 +1,6 @@
 import React from "react";
 import { FilterContainer, ContainerCart } from "./StyleHireNinja";
-import { IoCartOutline } from "react-icons/io5";
+import { IoCartOutline } from "react-icons/io5"
 
 class NinjaFilter extends React.Component {
   render() {
@@ -8,13 +8,11 @@ class NinjaFilter extends React.Component {
       <div>
         <ContainerCart>
           <input
-            value={this.props.query}
-            onChange={this.props.handleQuery}
-            type="text"
-            placeholder="Buscar"
+          type="text"
+          placeholder="Buscar"
           ></input>
           <button>
-            <IoCartOutline />
+          <IoCartOutline />
           </button>
         </ContainerCart>
         <FilterContainer>
