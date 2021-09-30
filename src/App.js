@@ -1,8 +1,7 @@
 import React from "react";
 import { ContainerApp, Header, ContainerStart } from "./style.js";
 import HireNinja from "./components/NinjaButtons/HireNinja/HireNinja";
-import BeNinja from "./components/NinjaButtons/BeNinja";
-import JobDetails from "./components/JobDetails/Index";
+import BeNinja from "./components/BeNinja/index.js";
 
 export default class App extends React.Component {
   state = {
@@ -53,7 +52,7 @@ export default class App extends React.Component {
     return (
       <ContainerApp>
         <Header>
-          <button onClick={() => this.handleClickStart}>
+          <button onClick={this.handleClickStart}>
             <img src="https://rude-yoke.surge.sh/static/media/ninjaIconOutline.8ba90ce1.png" />
             <h2>Labeninjas</h2>
           </button>

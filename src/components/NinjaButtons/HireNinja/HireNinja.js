@@ -11,6 +11,7 @@ class HireNinja extends React.Component {
     minValue: "",
     sorting: "title",
     currentPage: "",
+    jobId:""
   };
 
   componentDidMount() {
@@ -27,7 +28,8 @@ class HireNinja extends React.Component {
     try {
       this.setState({
         jobs: res.data.jobs,
-      });
+        
+      });console.log("jobs",this.state.jobs )
     } catch (err) {
       console.log(err);
     }
@@ -35,7 +37,10 @@ class HireNinja extends React.Component {
 
   handleShowDetails = () => {
     if (this.state.currentPage === "jobDetails") {
-      return <JobDetails changePage={this.changePage} />;
+      return <JobDetails changePage={this.changePage} 
+              jobId={this.state.jobId}
+              
+            />;
     } else if (this.state.currentPage === "back") {
       return <HireNinja />;
     }
@@ -46,6 +51,9 @@ class HireNinja extends React.Component {
       currentPage: page,
     });
   };
+  handleJobId = (jobId) => {
+    this.setState({jobId: jobId})
+  }
   handleMaxValue = (e) => {
     this.setState({
       maxValue: e.target.value,
@@ -95,6 +103,8 @@ class HireNinja extends React.Component {
             paymentMethods={job.paymentMethods}
             dueDate={job.dueDate}
             changePage={this.changePage}
+            handleJobId = {this.handleJobId}
+            jobId={job.id}
           />
         );
       });
