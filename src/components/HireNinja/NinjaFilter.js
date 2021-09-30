@@ -1,10 +1,20 @@
 import React from "react";
-import { FilterContainer } from "./StyleHireNinja";
+import { FilterContainer, ContainerCart } from "./StyleHireNinja";
+import { IoCartOutline } from "react-icons/io5"
 
 class NinjaFilter extends React.Component {
   render() {
     return (
       <div>
+        <ContainerCart>
+          <input
+          type="text"
+          placeholder="Buscar"
+          ></input>
+          <button>
+          <IoCartOutline />
+          </button>
+        </ContainerCart>
         <FilterContainer>
           <label htmlFor="sort">Ordenar Por:</label>
           <select
