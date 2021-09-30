@@ -1,8 +1,7 @@
 import React from "react";
 import { ContainerApp, Header, ContainerStart } from "./style.js";
 import HireNinja from "./components/NinjaButtons/HireNinja/HireNinja";
-import BeNinja from "./components/NinjaButtons/BeNinja";
-import JobDetails from "./components/JobDetails/Index";
+import BeNinja from "./components/BeNinja/index.js";
 
 export default class App extends React.Component {
   state = {

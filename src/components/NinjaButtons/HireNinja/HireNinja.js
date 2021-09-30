@@ -28,7 +28,8 @@ class HireNinja extends React.Component {
     try {
       this.setState({
         jobs: res.data.jobs,
-      });
+        
+      });console.log("jobs",this.state.jobs )
     } catch (err) {
       console.log(err);
     }
@@ -51,7 +52,6 @@ class HireNinja extends React.Component {
     });
   };
   handleJobId = (jobId) => {
-    console.log("recebeu do botão",jobId)
     this.setState({jobId: jobId})
   }
   handleMaxValue = (e) => {
