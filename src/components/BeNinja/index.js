@@ -109,10 +109,16 @@ export default class BeNinja extends React.Component {
             onChange={this.handleChangeJobDescription}
           />
           <input
+<<<<<<< HEAD
             placeholder="Valor"
             required
             type="number"
             min="0"
+=======
+            required
+            type="number"
+            placeholder="Preço"
+>>>>>>> master
             value={this.state.jobPrice}
             onChange={this.handleChangeJobPrice}
           />
