@@ -42,12 +42,6 @@ export default class BeNinja extends React.Component {
     this.setState({ [e.target.name]: e.target.checked });
   };
 
-  // handleChangePaymentMethods = (e) => {
-  //   const copyPaymentMethods = [];
-  //   copyPaymentMethods.push(e.target.checked);
-  //   return this.state.paymentMethods;
-  // };
-
   createJob = async (e) => {
     e.preventDefault();
     const url = "https://labeninjas.herokuapp.com/jobs";
@@ -115,12 +109,10 @@ export default class BeNinja extends React.Component {
             value={this.state.jobDescription}
             onChange={this.handleChangeJobDescription}
           />
-          <NumberFormat
+          <input
             required
-            decimalScale={2}
-            decimalSeparator=","
             type="number"
-            displayType="input"
+            placeholder="Preço"
             value={this.state.jobPrice}
             onChange={this.handleChangeJobPrice}
           />
