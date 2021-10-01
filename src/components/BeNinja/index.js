@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, CheckboxContainer } from "./styles";
 import axios from "axios";
-import NumberFormat from "react-number-format";
 
 const headers = {
   headers: {
@@ -13,7 +12,7 @@ export default class BeNinja extends React.Component {
   state = {
     jobTitle: "",
     jobDescription: "",
-    jobPrice: 0,
+    jobPrice: "",
     paymentMethods: [],
     jobDate: new Date(),
     checkedBoxCredit: false,
@@ -110,9 +109,10 @@ export default class BeNinja extends React.Component {
             onChange={this.handleChangeJobDescription}
           />
           <input
+            placeholder="Valor"
             required
             type="number"
-            placeholder="Preço"
+            min="0"
             value={this.state.jobPrice}
             onChange={this.handleChangeJobPrice}
           />
