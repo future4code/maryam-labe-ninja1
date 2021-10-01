@@ -1,13 +1,7 @@
 import React from "react";
 import axios from "axios";
 import styled from "styled-components";
-
-const Detalhes = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
+import {Detail, ButtonJobCard, DetailBody} from "./style"
 
 const headers = {
   headers: {
@@ -53,18 +47,21 @@ export default class JobDetails extends React.Component {
     
     
     return (
-      <div>
+      <DetailBody>
           <>Total={this.props.quantidade}</>
-        <Detalhes>
+        <Detail>
           <h2>Detalhes do Job</h2>
           <h3>{this.state.title}</h3>
-          <p>Descrição:{this.state.description}</p>
-          <p>Valor: {this.state.price}</p>
+          <p>Descrição: {this.state.description}</p>
+          <p><strong>Valor: {this.state.price},00</strong></p>
           <p>Data Encerramento: {this.state.date}</p>
-        </Detalhes>
-        <button onClick={() => this.props.changePage("voltar")}>Voltar</button>
-        <button onClick={() => this.props.addCart(this.state.job)}>Adicionar ao carrinho</button>
-      </div>
+        </Detail>
+        <ButtonJobCard>
+          <button onClick={() => this.props.changePage("voltar")}>Voltar</button>
+          <button onClick={() => this.props.addCart(this.state.job)}>Adicionar ao carrinho</button>
+        </ButtonJobCard>
+        
+      </DetailBody>
     );
   }
 }
