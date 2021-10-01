@@ -1,5 +1,5 @@
 import React from "react";
-import { ContainerApp, Header, ContainerStart } from "./style.js";
+import { ContainerApp, Header, ContainerStart, Footer } from "./style.js";
 import HireNinja from "./components/HireNinja/HireNinja";
 import BeNinja from "./components/BeNinja/index.js";
 import Cart from "./components/Cart/Index.js";
@@ -78,6 +78,13 @@ export default class App extends React.Component {
           </button>
         </Header>
         {this.renderSection()}
+        <Footer>
+          <p>Projeto desenvolvido com React por:</p>
+          <a href="https://www.linkedin.com/in/ericomarshall/" target="blank">Érico Marshall</a> 
+          <a href="https://www.linkedin.com/in/fabiofa87/" target="blank">Fábio Faria</a>
+          <a href="" target="blank">Glauber Apolinário</a>
+          <a href="https://www.linkedin.com/in/otavio-augusto-chrispim-dev/" target="blank">Otávio Augusto Chrispim</a>
+        </Footer>
       </ContainerApp>
     );
   }

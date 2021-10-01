@@ -1,5 +1,5 @@
 import React from "react";
-import {JobsCardContainer, ButtonJobCard}from "./StyleHireNinja"
+import { JobsCardContainer, ButtonJobCard } from "./StyleHireNinja";
 
 class JobsCard extends React.Component {
   state={job:[]
@@ -9,18 +9,16 @@ class JobsCard extends React.Component {
     console.log("job", this.props.job)
   }
   render() {
-    let convertDate = new Date(this.props.dueDate)
-      const formatedDate = convertDate.toLocaleDateString('pt-BR', {timeZone: "UTC"})
+    let convertDate = new Date(this.props.dueDate);
+    const formatedDate = convertDate.toLocaleDateString("pt-BR", {
+      timeZone: "UTC",
+    });
 
     return (
       <JobsCardContainer>
         <h3>{this.props.title}</h3>
-        <p>
-          Contratar Até: {formatedDate} 
-        </p>
-        <p>
-          Valor: R${this.props.price},00
-        </p>
+        <p>Contratar Até: {formatedDate}</p>
+        <p>Valor: R${this.props.price},00</p>
         <ButtonJobCard>
           <button
             onClick={() => {
@@ -35,6 +33,7 @@ class JobsCard extends React.Component {
               this.props.addCartUpdate(this.props.jobId);
             }}
             >carrinho</button>
+
         </ButtonJobCard>
       </JobsCardContainer>
     );

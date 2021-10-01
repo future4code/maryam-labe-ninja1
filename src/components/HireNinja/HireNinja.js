@@ -24,6 +24,7 @@ class HireNinja extends React.Component {
     cart:[],
     precoTotal:"",
     finalCart:[]
+
   };
 
   componentDidMount() {
@@ -39,7 +40,6 @@ class HireNinja extends React.Component {
     try {
       this.setState({
         jobs: res.data.jobs,
-        
       });
     } catch (err) {
       console.log(err);
@@ -91,6 +91,7 @@ precoFinal = () => {
       return <JobDetails changePage={this.changePage} 
               jobId={this.state.jobId}
             />;
+
     } else if (this.state.currentPage === "back") {
       return <HireNinja />;
     }
@@ -106,9 +107,16 @@ precoFinal = () => {
       currentPage: page,
     });
   };
+
+  handleQuery = (e) => {
+    this.setState({
+      query: e.target.value,
+    });
+  };
+
   handleJobId = (jobId) => {
-    this.setState({jobId: jobId})
-  }
+    this.setState({ jobId: jobId });
+  };
   handleMaxValue = (e) => {
     this.setState({
       maxValue: e.target.value,
@@ -131,6 +139,9 @@ precoFinal = () => {
   render() {
     const cartNumber = this.state.cart.length
     const jobsPosted = this.state.jobs
+      .filter((job) => {
+        return job.title.toLowerCase().includes(this.state.query.toLowerCase());
+      })
       .filter((job) => {
         return this.state.minValue === "" || job.price >= this.state.minValue;
       })
@@ -160,7 +171,7 @@ precoFinal = () => {
             paymentMethods={job.paymentMethods}
             dueDate={job.dueDate}
             changePage={this.changePage}
-            handleJobId = {this.handleJobId}
+            handleJobId={this.handleJobId}
             jobId={job.id}
             addCart={this.addCart}
             addCartUpdate={this.addCartUpdate}
@@ -179,6 +190,9 @@ precoFinal = () => {
       <>
         <NinjaFilter
           quantidade={cartNumber}
+
+          query={this.state.query}
+          handleQuery={this.handleQuery}
           maxValue={this.state.maxValue}
           minValue={this.state.minValue}
           handleMaxValue={this.handleMaxValue}
@@ -191,7 +205,6 @@ precoFinal = () => {
         <ContainerAllJobs>
           {jobsPosted}
         </ContainerAllJobs>
-        
       </>
     );
   }
