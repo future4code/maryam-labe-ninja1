@@ -2,6 +2,12 @@ import React from "react";
 import { JobsCardContainer, ButtonJobCard } from "./StyleHireNinja";
 
 class JobsCard extends React.Component {
+  state={job:[]
+  }
+  compónentDidMount(){
+    this.setState({job:this.props.job})
+    console.log("job", this.props.job)
+  }
   render() {
     let convertDate = new Date(this.props.dueDate);
     const formatedDate = convertDate.toLocaleDateString("pt-BR", {
@@ -22,7 +28,12 @@ class JobsCard extends React.Component {
           >
             Ver Detalhes
           </button>
-          <button>Carrinho</button>
+          <button
+            onClick={()=>{
+              this.props.addCartUpdate(this.props.jobId);
+            }}
+            >carrinho</button>
+
         </ButtonJobCard>
       </JobsCardContainer>
     );
