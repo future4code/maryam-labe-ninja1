@@ -20,6 +20,7 @@ export const ContainerStart = styled.div`
             border: none;
             background-color: var(--purple);
             box-shadow: 5px 0 20px -7px black;
+            
 
             :hover {
                 cursor: pointer;
@@ -36,8 +37,8 @@ export const Header = styled.div`
     display: flex;
     background-color: var(--purple);
     color: white;
-    width: 100vw;
-    padding: 10px;
+    width: 95vw;
+    padding: 2.5vw;
     box-shadow: 10px 0 15px -2px black;
 
     button {
@@ -54,6 +55,30 @@ export const Header = styled.div`
         img {
         width: 40px;
         margin:0 10px;
+        }
+    }
+`
+
+export const Footer = styled.div`
+    display: flex;
+    flex-direction: column;
+    background-color: var(--purple);
+    color: white;
+    width: 95vw;
+    height: 130px;
+    margin-top: 13vh;
+    padding: 2.5vw;
+    box-shadow: 5px 0 20px -7px black;
+
+    a {
+        width: 200px;
+        transition: all 0.2s;
+        margin-bottom: 7px;
+        text-decoration: none;
+        color: white;
+   
+        :hover {
+            font-weight: bolder;
         }
     }
 `
