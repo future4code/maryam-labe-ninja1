@@ -42,6 +42,9 @@ Abaixo segue o que foi utilizado na criação deste projeto:
 ## Contato
 
 Érico Marshall - [Github](https://github.com/egMarshall) - **ericogmarshall1@gmail.com**
+
 Fábio Faria - [Github](https://github.com/fabiofa87) - **fabiofadev87@gmail.com**
+
 Glauber Apolinário - [Github](https://github.com/GlauberApolinario) - **glauber.apolinario@yahoo.com.br**
+
 Otávio Augusto Chrispim - [Github](https://github.com/otavioachrispim) - **otaviochrispim@gmail.com**
