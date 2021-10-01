@@ -23,7 +23,8 @@ class HireNinja extends React.Component {
     jobId:"", 
     cart:[],
     precoTotal:"",
-    finalCart:[]
+    finalCart:[],
+    query: ""
 
   };
 

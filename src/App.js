@@ -82,7 +82,7 @@ export default class App extends React.Component {
           <p>Projeto desenvolvido com React por:</p>
           <a href="https://www.linkedin.com/in/ericomarshall/" target="blank">Érico Marshall</a> 
           <a href="https://www.linkedin.com/in/fabiofa87/" target="blank">Fábio Faria</a>
-          <a href="" target="blank">Glauber Apolinário</a>
+          <a href="https://www.linkedin.com/in/glauber-freitas-a20b74113/" target="blank">Glauber Apolinário</a>
           <a href="https://www.linkedin.com/in/otavio-augusto-chrispim-dev/" target="blank">Otávio Augusto Chrispim</a>
         </Footer>
       </ContainerApp>
