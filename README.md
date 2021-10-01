@@ -34,7 +34,7 @@ Abaixo segue o que foi utilizado na criação deste projeto:
 
 **funcionando com apenas os primeiros 12 itens da home e todos as páginas de detalhes de itens devido ao cache realizado com o getStaticProps do next, uma vez que em produção a api esta dando cors**
 
-<a href="https://marked-sheet.surge.sh" target-"blank">LabeNinjas</a>
+<a href="https://marked-sheet.surge.sh" target="blank">LabeNinjas</a>
 
 
 <!-- CONTACT -->
