@@ -3,8 +3,14 @@ import JobsCard from "./JobsCard";
 import axios from "axios";
 import NinjaFilter from "./NinjaFilter";
 import JobDetails from "../JobDetails/Index";
+import Cart from "../Cart/Index";
 import {ContainerAllJobs} from "./StyleHireNinja";
 
+const headers = {
+  headers: {
+    Authorization: "8c24d255-953c-478d-abd9-919b05f53b21",
+  },
+};
 
 
 class HireNinja extends React.Component {
@@ -14,20 +20,22 @@ class HireNinja extends React.Component {
     minValue: "",
     sorting: "title",
     currentPage: "",
-    jobId:""
+    jobId:"", 
+    cart:[],
+    precoTotal:"",
+    finalCart:[]
   };
 
   componentDidMount() {
+    console.log("montou")
     this.getAllJobs();
+    this.buildCart()
   }
+  
 
   getAllJobs = async () => {
     const url = "https://labeninjas.herokuapp.com/jobs";
-    const res = await axios.get(url, {
-      headers: {
-        Authorization: "8c24d255-953c-478d-abd9-919b05f53b21",
-      },
-    });
+    const res = await axios.get(url, headers);
     try {
       this.setState({
         jobs: res.data.jobs,
@@ -38,16 +46,60 @@ class HireNinja extends React.Component {
     }
   };
 
+  buildCart=()=>{
+    this.getAllJobs()
+    const aux=[]
+    console.log(this.state.jobs, "jobs state")
+    const jobsCart = this.state.jobs.filter((job)=>{
+      return job.taken===true
+    })
+    this.setState({finalCart: jobsCart})
+  }
+
+  updateJob =async (id, taken) => {
+    const url = `https://labeninjas.herokuapp.com/jobs/${id}`
+    const body = {
+      taken:taken
+    }
+    try {
+    const res = await axios.post(url, body, headers)
+    this.buildCart()
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  addCart=(job)=>{
+    const aux = [...this.state.cart, job]
+    this.setState({cart: aux})
+    console.log(this.state.cart, "adicionado")
+    console.log(aux, "auxiliar")
+};
+ addCartUpdate=(id)=>{
+   this.updateJob(id, true)
+
+ }
+
+ 
+precoFinal = () => {
+  const precofinal = this.state.cart.reduce((a, b) => ( (a) + (b.price)), 0)
+  console.log(precofinal)
+  this.setState({precoTotal:precofinal}) ;
+}
   handleShowDetails = () => {
     if (this.state.currentPage === "jobDetails") {
       return <JobDetails changePage={this.changePage} 
               jobId={this.state.jobId}
-              
             />;
     } else if (this.state.currentPage === "back") {
       return <HireNinja />;
     }
   };
+
+  handleTotal=(total)=>{
+  this.setState({precoTotal:total}) ;
+    console.log("total=",total)
+  }
 
   changePage = (page) => {
     this.setState({
@@ -75,7 +127,9 @@ class HireNinja extends React.Component {
     });
   };
 
+  
   render() {
+    const cartNumber = this.state.cart.length
     const jobsPosted = this.state.jobs
       .filter((job) => {
         return this.state.minValue === "" || job.price >= this.state.minValue;
@@ -108,21 +162,34 @@ class HireNinja extends React.Component {
             changePage={this.changePage}
             handleJobId = {this.handleJobId}
             jobId={job.id}
+            addCart={this.addCart}
+            addCartUpdate={this.addCartUpdate}
+            job={job}
           />
         );
       });
 
     return (
+      this.state.currentPage==="jobDetails"?
+      <JobDetails changePage={this.changePage} 
+        jobId={this.state.jobId}
+        addCart={this.addCart}
+        quantidade={cartNumber}
+      />:
       <>
         <NinjaFilter
+          quantidade={cartNumber}
           maxValue={this.state.maxValue}
           minValue={this.state.minValue}
           handleMaxValue={this.handleMaxValue}
           handleMinValue={this.handleMinValue}
           handleChangeSorting={this.handleChangeSorting}
+          total={this.state.precoTotal}
+          handleClickCart={this.props.handleClickCart}
         />
+        <button onClick={()=>this.props.handleClickCart(this.state.finalCart)}>carrinho</button>
         <ContainerAllJobs>
-          {this.handleShowDetails() || jobsPosted}
+          {jobsPosted}
         </ContainerAllJobs>
         
       </>

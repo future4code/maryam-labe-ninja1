@@ -24,6 +24,7 @@ export default class JobDetails extends React.Component {
     paymentMethods: [],
     date: "",
     taken: false,
+    job:{}
   };
 
   componentDidMount() {
@@ -39,9 +40,10 @@ export default class JobDetails extends React.Component {
       this.setState({ price: res.data.price });
       this.setState({ paymentMethods: res.data.paymentMethods });
       let convertDate = new Date(res.data.dueDate)
-      convertDate = convertDate.toLocaleDateString()
+      convertDate = convertDate.toLocaleDateString('pt-BR', {timeZone: "UTC"})
       this.setState({ date: convertDate})
       this.setState({ taken: res.data.taken });
+      this.setState({job:res.data})
     } catch (err) {
       alert(err.message);
     }
@@ -52,6 +54,7 @@ export default class JobDetails extends React.Component {
     
     return (
       <div>
+          <>Total={this.props.quantidade}</>
         <Detalhes>
           <h2>Detalhes do Job</h2>
           <h3>{this.state.title}</h3>
@@ -60,6 +63,7 @@ export default class JobDetails extends React.Component {
           <p>Data Encerramento: {this.state.date}</p>
         </Detalhes>
         <button onClick={() => this.props.changePage("voltar")}>Voltar</button>
+        <button onClick={() => this.props.addCart(this.state.job)}>Adicionar ao carrinho</button>
       </div>
     );
   }

@@ -2,10 +2,12 @@ import React from "react";
 import { ContainerApp, Header, ContainerStart } from "./style.js";
 import HireNinja from "./components/HireNinja/HireNinja";
 import BeNinja from "./components/BeNinja/index.js";
+import Cart from "./components/Cart/Index.js";
 
 export default class App extends React.Component {
   state = {
     section: "start",
+    cart:[]
   };
 
   handleClickStart = () => {
@@ -19,6 +21,13 @@ export default class App extends React.Component {
   handleClickHireNinja = () => {
     this.setState({ section: "hireNinja" });
   };
+
+  handleClickCart =(cart1) =>{
+    this.setState({section: "cart"})
+    this.setState({cart: cart1})
+    console.log("cart1", this.state.cart)
+
+  }
 
   renderSection = () => {
     switch (this.state.section) {
@@ -40,7 +49,17 @@ export default class App extends React.Component {
       case "beNinja":
         return <BeNinja />;
       case "hireNinja":
-        return <HireNinja />;
+        return <HireNinja 
+                  handleClickCart={this.handleClickCart}
+                  cart={this.state.cart}
+                  section={this.state.section}
+                />;
+      case "cart":
+        return <Cart
+                handleClickCart={this.handleClickCart}
+                handleClickHireNinja={this.handleClickHireNinja}
+                cart={this.state.cart}
+              />
 
       default:
         return <h2>Oops! Algo deu errado!</h2>;
