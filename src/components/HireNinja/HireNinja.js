@@ -23,7 +23,8 @@ class HireNinja extends React.Component {
     jobId:"", 
     cart:[],
     precoTotal:"",
-    finalCart:[]
+    finalCart:[],
+    query:""
 
   };
 
@@ -52,8 +53,12 @@ class HireNinja extends React.Component {
     console.log(this.state.jobs, "jobs state")
     const jobsCart = this.state.jobs.filter((job)=>{
       return job.taken===true
+    }).map((job)=>{
+      return aux.push(job)
+
     })
     this.setState({finalCart: jobsCart})
+    console.log(jobsCart,"teste")
   }
 
   updateJob =async (id, taken) => {
@@ -137,7 +142,7 @@ precoFinal = () => {
 
   
   render() {
-    const cartNumber = this.state.cart.length
+    // const cartNumber = this.state.cart.length
     const jobsPosted = this.state.jobs
       .filter((job) => {
         return job.title.toLowerCase().includes(this.state.query.toLowerCase());
@@ -185,11 +190,11 @@ precoFinal = () => {
       <JobDetails changePage={this.changePage} 
         jobId={this.state.jobId}
         addCart={this.addCart}
-        quantidade={cartNumber}
+        // quantidade={cartNumber}
       />:
       <>
         <NinjaFilter
-          quantidade={cartNumber}
+          // quantidade={cartNumber}
 
           query={this.state.query}
           handleQuery={this.handleQuery}
