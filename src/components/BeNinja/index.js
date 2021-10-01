@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, CheckboxContainer } from "./styles";
 import axios from "axios";
-import NumberFormat from "react-number-format";
 
 const headers = {
   headers: {
@@ -13,7 +12,7 @@ export default class BeNinja extends React.Component {
   state = {
     jobTitle: "",
     jobDescription: "",
-    jobPrice: 0,
+    jobPrice: "",
     paymentMethods: [],
     jobDate: new Date(),
     checkedBoxCredit: false,
@@ -41,12 +40,6 @@ export default class BeNinja extends React.Component {
   handleChangeCheckedBox = (e) => {
     this.setState({ [e.target.name]: e.target.checked });
   };
-
-  // handleChangePaymentMethods = (e) => {
-  //   const copyPaymentMethods = [];
-  //   copyPaymentMethods.push(e.target.checked);
-  //   return this.state.paymentMethods;
-  // };
 
   createJob = async (e) => {
     e.preventDefault();
@@ -115,12 +108,11 @@ export default class BeNinja extends React.Component {
             value={this.state.jobDescription}
             onChange={this.handleChangeJobDescription}
           />
-          <NumberFormat
+          <input
+            placeholder="Valor"
             required
-            decimalScale={2}
-            decimalSeparator=","
             type="number"
-            displayType="input"
+            min="0"
             value={this.state.jobPrice}
             onChange={this.handleChangeJobPrice}
           />

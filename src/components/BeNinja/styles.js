@@ -42,23 +42,22 @@ export const Container = styled.div`
       padding: 0 2rem;
       border-radius: 10px;
       border: 0;
-      color: var(--background);
-      background-color: var(--blue);
+      color: white;
+      background-color: var(--purple);
       transition: all 0.2s;
 
       :hover {
         border: 0;
-        background-color: var(--blue);
+        background-color: var(--secPurple);
         color: var(--background);
       }
     }
   }
-`;
+`
 
 export const CheckboxContainer = styled.div`
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
   input {
     & + label {
       margin-right: 24px;
@@ -68,4 +67,4 @@ export const CheckboxContainer = styled.div`
   label {
     margin-left: 8px;
   }
-`;
+`
