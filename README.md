@@ -17,12 +17,7 @@
 
 ## Sobre o Projeto
 
-Este projeto consiste em uma aplicação web de e-commerce em que seus usuários podem estar acessando tanto pelo browser de suas máquinas quanto por seus dispositivos móveis. Sendo assim uma aplicação responsiva.
-
-<img src="./src/assets/desktop.gif"/>
-<img src="./src/assets/responsivo.gif"/>
-
-Mais imagens do projeto ao final.
+Este projeto consiste em uma aplicação web de e-commerce em que seus usuários podem estar acessando tanto pelo browser de suas máquinas.
 
 ### Feito Com
 
