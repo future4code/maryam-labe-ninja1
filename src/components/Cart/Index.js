@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { JobsCart } from "./StyleCart";
+import { JobsCart, CartJobs } from "./StyleCart";
 import axios from "axios";
 
 const headers = {
@@ -60,19 +60,20 @@ export default class Cart extends React.Component {
       return (
         <JobsCart>
           <div key={job.id}>
-            {job.title}
-            {job.price}
+            Serviço:{job.title}
+            Valor: R${job.price},00
           </div>
           <button onClick={()=>this.updateJob(job.id, false)}>Excluir</button>
         </JobsCart>
       );
     });
     return (
-      <div>
+      <CartJobs>
+        <h2>Serviços no Carrinho</h2>
         {allCart}
-        Total = {`RS${this.precoFinal(this.state.cart)},00`}
+        <h2>Total = {`RS${this.precoFinal(this.state.cart)},00`}</h2>
         <button onClick={this.props.handleClickHireNinja}>Voltar</button>
-      </div>
+      </CartJobs>
     );
   }
 }

@@ -181,12 +181,8 @@ class HireNinja extends React.Component {
           handleChangeSorting={this.handleChangeSorting}
           total={this.state.precoTotal}
           handleClickCart={this.props.handleClickCart}
+          cart={this.state.finalCart}
         />
-        <button
-          onClick={() => this.props.handleClickCart(this.state.finalCart)}
-        >
-          carrinho
-        </button>
         <ContainerAllJobs>{jobsPosted}</ContainerAllJobs>
       </>
     );
