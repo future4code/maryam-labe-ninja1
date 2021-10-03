@@ -21,8 +21,6 @@ class HireNinja extends React.Component {
     currentPage: "",
     jobId: "",
     cart: [],
-    precoTotal: "",
-    finalCart: [],
     query: "",
   };
 
@@ -65,10 +63,7 @@ class HireNinja extends React.Component {
     this.updateJob(id, false);
   };
 
-  precoFinal = () => {
-    const precofinal = this.state.cart.reduce((a, b) => a + b.price, 0);
-    this.setState({ precoTotal: precofinal });
-  };
+
   handleShowDetails = () => {
     if (this.state.currentPage === "jobDetails") {
       return (
@@ -77,11 +72,6 @@ class HireNinja extends React.Component {
     } else if (this.state.currentPage === "back") {
       return <HireNinja />;
     }
-  };
-
-  handleTotal = (total) => {
-    this.setState({ precoTotal: total });
-    console.log("total=", total);
   };
 
   changePage = (page) => {
@@ -179,9 +169,8 @@ class HireNinja extends React.Component {
           handleMaxValue={this.handleMaxValue}
           handleMinValue={this.handleMinValue}
           handleChangeSorting={this.handleChangeSorting}
-          total={this.state.precoTotal}
           handleClickCart={this.props.handleClickCart}
-          cart={this.state.finalCart}
+          cart={this.state.cart}
         />
         <ContainerAllJobs>{jobsPosted}</ContainerAllJobs>
       </>
