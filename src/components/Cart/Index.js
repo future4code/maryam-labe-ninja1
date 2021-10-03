@@ -15,7 +15,6 @@ export default class Cart extends React.Component {
 
   componentDidMount() {
     console.log("mount", this.props.cart);
-    // this.mountCart();
     this.getAllJobs();
   }
 
@@ -29,7 +28,6 @@ export default class Cart extends React.Component {
 
   buildCart = (jobs) => {
     this.getAllJobs();
-    console.log(jobs, "jobs state");
     const jobsCart = jobs.filter((job) => {
       return job.taken === true;
     });
@@ -41,9 +39,17 @@ export default class Cart extends React.Component {
     const res = await axios.get(url, headers);
     try {
       this.buildCart(res.data.jobs);
-      //   this.setState({
-      //     jobs: res.data.jobs,
-      //   });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  updateJob = async (id, taken) => {
+    const url = `https://labeninjas.herokuapp.com/jobs/${id}`;
+    const body = {
+      taken: taken,
+    };
+    try {
+      const res = await axios.post(url, body, headers);
     } catch (err) {
       console.log(err);
     }
@@ -57,14 +63,14 @@ export default class Cart extends React.Component {
             {job.title}
             {job.price}
           </div>
-          <button>Excluir</button>
+          <button onClick={()=>this.updateJob(job.id, false)}>Excluir</button>
         </JobsCart>
       );
     });
     return (
       <div>
         {allCart}
-        Total = {`RS${this.precoFinal(this.props.cart)},00`}
+        Total = {`RS${this.precoFinal(this.state.cart)},00`}
         <button onClick={this.props.handleClickHireNinja}>Voltar</button>
       </div>
     );

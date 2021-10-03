@@ -27,9 +27,7 @@ class HireNinja extends React.Component {
   };
 
   componentDidMount() {
-    console.log("montou");
     this.getAllJobs();
-    this.buildCart();
   }
 
   getAllJobs = async () => {
@@ -44,15 +42,6 @@ class HireNinja extends React.Component {
     }
   };
 
-  buildCart = () => {
-    this.getAllJobs();
-    console.log(this.state.jobs, "jobs state");
-    const jobsCart = this.state.jobs.filter((job) => {
-      return job.taken === true;
-    });
-    this.setState({ finalCart: jobsCart });
-  };
-
   updateJob = async (id, taken) => {
     const url = `https://labeninjas.herokuapp.com/jobs/${id}`;
     const body = {
@@ -60,7 +49,6 @@ class HireNinja extends React.Component {
     };
     try {
       const res = await axios.post(url, body, headers);
-      this.buildCart();
     } catch (err) {
       console.log(err);
     }
@@ -69,16 +57,16 @@ class HireNinja extends React.Component {
   addCart = (job) => {
     const aux = [...this.state.cart, job];
     this.setState({ cart: aux });
-    console.log(this.state.cart, "adicionado");
-    console.log(aux, "auxiliar");
   };
   addCartUpdate = (id) => {
     this.updateJob(id, true);
   };
+  removeCartUpdate = (id) => {
+    this.updateJob(id, false);
+  };
 
   precoFinal = () => {
     const precofinal = this.state.cart.reduce((a, b) => a + b.price, 0);
-    console.log(precofinal);
     this.setState({ precoTotal: precofinal });
   };
   handleShowDetails = () => {
