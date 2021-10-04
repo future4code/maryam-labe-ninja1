@@ -6,7 +6,6 @@ class JobsCard extends React.Component {
   }
   compónentDidMount(){
     this.setState({job:this.props.job})
-    console.log("job", this.props.job)
   }
   render() {
     let convertDate = new Date(this.props.dueDate);
@@ -32,7 +31,7 @@ class JobsCard extends React.Component {
             onClick={()=>{
               this.props.addCartUpdate(this.props.jobId);
             }}
-            >carrinho</button>
+            >Contratar</button>
 
         </ButtonJobCard>
       </JobsCardContainer>

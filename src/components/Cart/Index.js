@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { JobsCart } from "./StyleCart";
+import React from 'react';
+import { JobsCart, CartJobs, Description } from "./StyleCart";
 import axios from "axios";
 
 const headers = {
@@ -14,8 +14,6 @@ export default class Cart extends React.Component {
   };
 
   componentDidMount() {
-    console.log("mount", this.props.cart);
-    // this.mountCart();
     this.getAllJobs();
   }
 
@@ -29,7 +27,6 @@ export default class Cart extends React.Component {
 
   buildCart = (jobs) => {
     this.getAllJobs();
-    console.log(jobs, "jobs state");
     const jobsCart = jobs.filter((job) => {
       return job.taken === true;
     });
@@ -41,32 +38,55 @@ export default class Cart extends React.Component {
     const res = await axios.get(url, headers);
     try {
       this.buildCart(res.data.jobs);
-      //   this.setState({
-      //     jobs: res.data.jobs,
-      //   });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  updateJob = async (id, taken) => {
+    const url = `https://labeninjas.herokuapp.com/jobs/${id}`;
+    const body = {
+      taken: taken,
+    };
+    try {
+      await axios.post(url, body, headers);
     } catch (err) {
       console.log(err);
     }
   };
 
+  cleanCart=(frase)=>{
+    const cart = this.state.cart.filter((job) => {
+      return job.taken === true;
+      
+    });
+    for (let job of cart){
+      this.updateJob(job.id, false)
+    } 
+    frase==="limpar"?
+    alert("Todos os serviços do carrinho foram excluidos"):
+    alert("Obrigado! Os serviços foram contratados.")
+  }
+
   render() {
     const allCart = this.state.cart.map((job) => {
       return (
-        <JobsCart>
-          <div key={job.id}>
-            {job.title}
-            {job.price}
-          </div>
-          <button>Excluir</button>
+        <JobsCart key = {job.id}>
+          <Description>
+            Serviço: {job.title} R${job.price},00
+          </Description>
+          <button onClick={()=>this.updateJob(job.id, false)}>Excluir</button>
         </JobsCart>
       );
     });
     return (
-      <div>
+      <CartJobs>
+        <h2>Serviços no Carrinho</h2>
         {allCart}
-        Total = {`RS${this.precoFinal(this.props.cart)},00`}
-        <button onClick={this.props.handleClickHireNinja}>Voltar</button>
-      </div>
+        <h2>Total = {`RS${this.precoFinal(this.state.cart)},00`}</h2>
+        <button onClick={this.props.handleClickHireNinja}>Continuar Comprando</button>
+        <button onClick={()=>this.cleanCart("limpar")}>Limpar Carrinho</button>
+        <button onClick={()=>this.cleanCart("contratar")}>Contratar Serviços</button>
+      </CartJobs>
     );
   }
 }

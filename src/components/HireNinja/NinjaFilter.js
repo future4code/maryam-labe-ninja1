@@ -13,11 +13,10 @@ class NinjaFilter extends React.Component {
             type="text"
             placeholder="Buscar"
           ></input>
-          <button onClick={()=>this.props.handleClickCart()}>
+          <button onClick={()=>this.props.handleClickCart(this.props.cart)}>
           <IoCartOutline />
-
+          <>{this.props.quantity}</>
           </button>
-          <>{this.props.quantidade}</>
         </ContainerCart>
         <FilterContainer>
           <label htmlFor="sort">Ordenar Por:</label>

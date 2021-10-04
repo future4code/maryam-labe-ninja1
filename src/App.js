@@ -25,7 +25,6 @@ export default class App extends React.Component {
   handleClickCart =(cart1) =>{
     this.setState({section: "cart"})
     this.setState({cart: cart1})
-    console.log("cart1", this.state.cart)
 
   }
 
