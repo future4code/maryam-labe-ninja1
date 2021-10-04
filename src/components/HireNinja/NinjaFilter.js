@@ -15,7 +15,7 @@ class NinjaFilter extends React.Component {
           ></input>
           <button onClick={()=>this.props.handleClickCart(this.props.cart)}>
           <IoCartOutline />
-          <>{this.props.quantidade}</>
+          <>{this.props.quantity}</>
           </button>
         </ContainerCart>
         <FilterContainer>

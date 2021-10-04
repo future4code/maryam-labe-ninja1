@@ -1,17 +1,5 @@
 import styled from "styled-components";
 
-// export const JobsCart= styled.div`
-// width: 270px;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   background-color: white;
-//   border-radius: 5px;
-//   border: 1px solid #978ACE;
-//   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-//   padding-bottom: 15px;
-// `
-
 export const JobsCart = styled.div`
     margin-top: 10px;
     padding: 5px;
@@ -23,12 +11,16 @@ export const JobsCart = styled.div`
     border-radius: 5px;
     border: 1px solid #978ACE;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    /* padding-bottom: 15px; */
 `
+export const Description = styled.div`
+font-size: 20px;
+
+`
+
 export const CartJobs = styled.div`
 
 button {
-    width: 100px;
+    width: 180px;
     font-size: 90%;
     color: white;
     border: none;
@@ -36,6 +28,7 @@ button {
     background-color: #978ACE;
     padding: 5px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    margin: 10px;
 
     :hover {
       font-weight: bolder;
@@ -46,3 +39,4 @@ button {
     }
   }
 `
+

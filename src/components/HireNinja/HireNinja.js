@@ -3,7 +3,6 @@ import JobsCard from "./JobsCard";
 import axios from "axios";
 import NinjaFilter from "./NinjaFilter";
 import JobDetails from "../JobDetails/Index";
-import Cart from "../Cart/Index";
 import { ContainerAllJobs } from "./StyleHireNinja";
 
 const headers = {
@@ -22,10 +21,14 @@ class HireNinja extends React.Component {
     jobId: "",
     cart: [],
     query: "",
+    quantity:0,
+    quantidade:0
   };
 
   componentDidMount() {
     this.getAllJobs();
+
+    
   }
 
   getAllJobs = async () => {
@@ -40,13 +43,21 @@ class HireNinja extends React.Component {
     }
   };
 
+  quantityCart = () => {
+    
+    const quantity = this.state.jobs.filter((job) => {
+      return job.taken === true;
+    });
+    return quantity.length
+  };
+
   updateJob = async (id, taken) => {
     const url = `https://labeninjas.herokuapp.com/jobs/${id}`;
     const body = {
       taken: taken,
     };
     try {
-      const res = await axios.post(url, body, headers);
+      await axios.post(url, body, headers);
     } catch (err) {
       console.log(err);
     }
@@ -56,18 +67,24 @@ class HireNinja extends React.Component {
     const aux = [...this.state.cart, job];
     this.setState({ cart: aux });
   };
+
   addCartUpdate = (id) => {
     this.updateJob(id, true);
   };
   removeCartUpdate = (id) => {
     this.updateJob(id, false);
   };
+  
 
 
   handleShowDetails = () => {
     if (this.state.currentPage === "jobDetails") {
       return (
-        <JobDetails changePage={this.changePage} jobId={this.state.jobId} />
+        <JobDetails 
+        changePage={this.changePage} 
+        jobId={this.state.jobId} 
+        addCartUpdate={this.addCartUpdate}
+        />
       );
     } else if (this.state.currentPage === "back") {
       return <HireNinja />;
@@ -108,7 +125,7 @@ class HireNinja extends React.Component {
   };
 
   render() {
-    const cartNumber = this.state.cart.length;
+    const cartQuantity = this.quantityCart()
     const jobsPosted = this.state.jobs
       .filter((job) => {
         return job.title.toLowerCase().includes(this.state.query.toLowerCase());
@@ -155,13 +172,13 @@ class HireNinja extends React.Component {
       <JobDetails
         changePage={this.changePage}
         jobId={this.state.jobId}
-        addCart={this.addCart}
-        quantidade={cartNumber}
+        addCartUpdate={this.addCartUpdate}
+        quantity={cartQuantity}
       />
     ) : (
       <>
         <NinjaFilter
-          quantidade={cartNumber}
+          quantity={cartQuantity}
           query={this.state.query}
           handleQuery={this.handleQuery}
           maxValue={this.state.maxValue}

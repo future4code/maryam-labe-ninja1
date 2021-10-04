@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import styled from "styled-components";
 import {Detail, ButtonJobCard, DetailBody} from "./style"
 
 const headers = {
@@ -48,7 +47,7 @@ export default class JobDetails extends React.Component {
     
     return (
       <DetailBody>
-          <>Total={this.props.quantidade}</>
+          <h2>Total de Serviços no Carrinho={this.props.quantity}</h2>
         <Detail>
           <h2>Detalhes do Job</h2>
           <h3>{this.state.title}</h3>
@@ -58,7 +57,7 @@ export default class JobDetails extends React.Component {
         </Detail>
         <ButtonJobCard>
           <button onClick={() => this.props.changePage("voltar")}>Voltar</button>
-          <button onClick={() => this.props.addCart(this.state.job)}>Adicionar ao carrinho</button>
+          <button onClick={()=> this.props.addCartUpdate(this.props.jobId)}>Adicionar ao carrinho</button>
         </ButtonJobCard>
         
       </DetailBody>

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { JobsCart, CartJobs } from "./StyleCart";
+import React from 'react';
+import { JobsCart, CartJobs, Description } from "./StyleCart";
 import axios from "axios";
 
 const headers = {
@@ -14,7 +14,6 @@ export default class Cart extends React.Component {
   };
 
   componentDidMount() {
-    console.log("mount", this.props.cart);
     this.getAllJobs();
   }
 
@@ -49,20 +48,32 @@ export default class Cart extends React.Component {
       taken: taken,
     };
     try {
-      const res = await axios.post(url, body, headers);
+      await axios.post(url, body, headers);
     } catch (err) {
       console.log(err);
     }
   };
 
+  cleanCart=(frase)=>{
+    const cart = this.state.cart.filter((job) => {
+      return job.taken === true;
+      
+    });
+    for (let job of cart){
+      this.updateJob(job.id, false)
+    } 
+    frase==="limpar"?
+    alert("Todos os serviços do carrinho foram excluidos"):
+    alert("Obrigado! Os serviços foram contratados.")
+  }
+
   render() {
     const allCart = this.state.cart.map((job) => {
       return (
-        <JobsCart>
-          <div key={job.id}>
-            Serviço:{job.title}
-            Valor: R${job.price},00
-          </div>
+        <JobsCart key = {job.id}>
+          <Description>
+            Serviço: {job.title} R${job.price},00
+          </Description>
           <button onClick={()=>this.updateJob(job.id, false)}>Excluir</button>
         </JobsCart>
       );
@@ -72,7 +83,9 @@ export default class Cart extends React.Component {
         <h2>Serviços no Carrinho</h2>
         {allCart}
         <h2>Total = {`RS${this.precoFinal(this.state.cart)},00`}</h2>
-        <button onClick={this.props.handleClickHireNinja}>Voltar</button>
+        <button onClick={this.props.handleClickHireNinja}>Continuar Comprando</button>
+        <button onClick={()=>this.cleanCart("limpar")}>Limpar Carrinho</button>
+        <button onClick={()=>this.cleanCart("contratar")}>Contratar Serviços</button>
       </CartJobs>
     );
   }
